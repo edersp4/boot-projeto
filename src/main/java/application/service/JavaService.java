@@ -1,0 +1,20 @@
+package application.service;
+
+import org.apache.commons.io.FileUtils;
+
+import java.io.File;
+
+public class JavaService {
+    public static final String JAVA_PATH = "\\\\sp7266sr600\\PUBLICA\\CEDESSP334\\Boot\\Ferramentas\\Java\\jdk1.8.0_144";
+
+    public void executar(){
+
+        try {
+            FileUtils.copyDirectory(new File(JAVA_PATH) , new File(CopiarArquivosService.DIRETORIO_ROOT));
+
+        }catch (Exception e){
+
+        }
+
+    }
+}
