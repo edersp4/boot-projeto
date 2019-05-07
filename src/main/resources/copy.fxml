@@ -1,14 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="356.0" prefWidth="488.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.ArquivoController">
+<AnchorPane prefHeight="395.0" prefWidth="527.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.ArquivoController">
    <children>
-      <Button fx:id="copiarbtn" layoutX="84.0" layoutY="199.0" mnemonicParsing="false" onAction="#copiarArquivo" prefHeight="25.0" prefWidth="320.0" text="Boot Projetos" />
-      <CheckBox fx:id="ferramenta" layoutX="36.0" layoutY="33.0" mnemonicParsing="false" text="Ferramentas" />
-      <CheckBox fx:id="git" layoutX="36.0" layoutY="61.0" mnemonicParsing="false" text="Git" />
-      <CheckBox fx:id="java" layoutX="36.0" layoutY="89.0" mnemonicParsing="false" text="Java" />
+      <Accordion layoutX="143.0" layoutY="104.0" />
+      <TitledPane animated="false" layoutX="272.0" layoutY="14.0" prefHeight="310.0" prefWidth="240.0" text="Ferramentas">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="107.0" prefWidth="253.0">
+               <children>
+                  <CheckBox fx:id="ferramenta" layoutX="31.0" layoutY="40.0" mnemonicParsing="false" text="Ferramentas" />
+                  <CheckBox fx:id="java" layoutX="162.0" layoutY="38.0" mnemonicParsing="false" text="Java" />
+                  <Button fx:id="copiarbtn" layoutX="38.0" layoutY="242.0" mnemonicParsing="false" onAction="#copiarFerramenta" prefHeight="25.0" prefWidth="155.0" text="Copiar Ferramentas" />
+               </children>
+            </AnchorPane>
+        </content>
+      </TitledPane>
+      <TitledPane animated="false" layoutX="14.0" layoutY="14.0" prefHeight="310.0" prefWidth="202.0" text="Projetos">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                   <CheckBox fx:id="sipdi" layoutX="17.0" layoutY="95.0" mnemonicParsing="false" text="PDI" />
+                   <CheckBox fx:id="sigdf"  layoutX="18.0" layoutY="17.0" mnemonicParsing="false" text="GDF" />
+                  <CheckBox  fx:id="sirff" layoutX="17.0" layoutY="57.0" mnemonicParsing="false" text="RFF" />
+                  <Button fx:id="inicializar" layoutX="62.0" layoutY="245.0" mnemonicParsing="false" text="Inicializar" onAction="#inicializar" />
+               </children>
+            </AnchorPane>
+        </content>
+      </TitledPane>
    </children>
 </AnchorPane>
