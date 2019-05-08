@@ -11,7 +11,7 @@ public class Ferramenta {
     public void executar(){
 
         try {
-            File ferramenta_path = new File(CopiarArquivosService.DIRETORIO_ROOT + File.separator + "Ferramenta");
+            File ferramenta_path = new File(CopiarFerramentaService.DIRETORIO_ROOT + File.separator + "Ferramenta");
 
             if (!ferramenta_path.exists()) {
                 ferramenta_path.mkdirs();

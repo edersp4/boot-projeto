@@ -3,9 +3,9 @@ package application.service;
 import javax.swing.*;
 import java.io.File;
 
-public class CopiarArquivosService {
+public class CopiarFerramentaService {
 
-    public static final String DIRETORIO_ROOT = "C:" + File.separator + "DesenvolvimentoAux";
+    public static final String DIRETORIO_ROOT = "C:" + File.separator + "Desenvolvimento";
 
     public void processar(boolean java, boolean ferramenta) {
 

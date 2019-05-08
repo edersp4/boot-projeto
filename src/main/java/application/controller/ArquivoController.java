@@ -1,6 +1,6 @@
 package application.controller;
 
-import application.service.CopiarArquivosService;
+import application.service.CopiarFerramentaService;
 import application.service.GitService;
 import application.service.ProjetosService;
 import javafx.fxml.FXML;
@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 public class ArquivoController {
 
 
-    CopiarArquivosService copiarArquivosService = new CopiarArquivosService();
+    CopiarFerramentaService copiarFerramentaService = new CopiarFerramentaService();
     private Stage dialogStage;
     @FXML
     private Button copiarbtn;
@@ -39,7 +39,7 @@ public class ArquivoController {
 
     @FXML
     public void copiarFerramenta() {
-        copiarArquivosService.processar(java.isSelected(), ferramenta.isSelected());
+        copiarFerramentaService.processar(java.isSelected(), ferramenta.isSelected());
     }
 
 

@@ -10,7 +10,7 @@ public class JavaService {
     public void executar(){
 
         try {
-            FileUtils.copyDirectory(new File(JAVA_PATH) , new File(CopiarArquivosService.DIRETORIO_ROOT + File.separator + "jdk1.8.0_144"));
+            FileUtils.copyDirectory(new File(JAVA_PATH) , new File(CopiarFerramentaService.DIRETORIO_ROOT + File.separator + "jdk1.8.0_144"));
 
         }catch (Exception e){
 
