@@ -21,10 +21,12 @@ public class GitService {
 
         UsernamePasswordCredentialsProvider credentials = new UsernamePasswordCredentialsProvider(tfsUser, password);
         cloneCommand.setCredentialsProvider(credentials);
-        Git repository = cloneCommand.call();
+        cloneCommand.call();
+        System.out.println("repositoryUrl = " + repositoryUrl + " foi criado com sucesso !");
+//        Git repository = cloneCommand.call();
 
-        repository.checkout().setCreateBranch(true).setName("develop")
-                .setUpstreamMode(CreateBranchCommand.SetupUpstreamMode.SET_UPSTREAM)
-                .setStartPoint("origin/develop").call();
+//        repository.checkout().setCreateBranch(true).setName("develop")
+//                .setUpstreamMode(CreateBranchCommand.SetupUpstreamMode.SET_UPSTREAM)
+//                .setStartPoint("origin/develop").call();
     }
 }
