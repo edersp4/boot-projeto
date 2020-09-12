@@ -2,14 +2,17 @@ package application.service;
 
 import javax.swing.*;
 import java.io.File;
+import java.util.List;
 
 public class CopiarFerramentaService {
 
     public static final String DIRETORIO_ROOT = "C:" + File.separator + "Desenvolvimento";
+    GitService gitService = new GitService();
+
 
     public void processar(boolean java, boolean ferramenta) {
 
-    Runnable iniciar = () -> {
+        Runnable iniciar = () -> {
 
             File tools = new File(DIRETORIO_ROOT);
 
@@ -31,11 +34,14 @@ public class CopiarFerramentaService {
             }
         };
 
-    Thread thread = new Thread(iniciar);
+        Thread thread = new Thread(iniciar);
 
-    thread.start();
+        thread.start();
 
     }
 
 
+    public void baixarTodosOsProjetosPeloGit() {
+//        gitService.cloneRepo();
+    }
 }

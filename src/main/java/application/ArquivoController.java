@@ -1,4 +1,4 @@
-package application.controller;
+package application;
 
 import application.service.CopiarFerramentaService;
 import application.service.GitService;
@@ -27,7 +27,7 @@ public class ArquivoController {
     @FXML
     private CheckBox java;
     @FXML
-    private CheckBox ferramenta;
+    private CheckBox baixarTodosProjetosGit;
     @FXML
     private Button inicializar;
 
@@ -39,7 +39,7 @@ public class ArquivoController {
 
     @FXML
     public void copiarFerramenta() {
-        copiarFerramentaService.processar(java.isSelected(), ferramenta.isSelected());
+        copiarFerramentaService.baixarTodosOsProjetosPeloGit();
     }
 
 
