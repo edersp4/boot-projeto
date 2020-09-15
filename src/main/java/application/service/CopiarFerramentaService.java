@@ -4,57 +4,25 @@ import org.eclipse.jgit.api.errors.GitAPIException;
 
 import javax.swing.*;
 import java.io.File;
-import java.util.List;
 
 public class CopiarFerramentaService {
+
     //https://gitlab-prd1.accesstage.com.br/veragi/frontend-veragi.git
-    public static final String DIRETORIO_ROOT = "/Users/ederson/desenvolvimento";
-    GitService gitService = new GitService();
-    private static String URL_PARA_CLONE = "https://gitlab-prd1.accesstage.com.br/veragi/";
-    private static List<String> projetos = List.of(
-            "mer",
-            "integration-kobold-feign",
-            "integration-kobold",
-            "edi",
-            "edi-feign",
-            "veragi-public",
-            "identity-access-feign",
-            "identity-access",
-            "business-utils",
-            "register-base-feign",
-            "register-base",
-            "oauth-feign",
-            "oauth",
-            "prepayment-feign",
-            "prepayment",
-            "invoice-draft-feign",
-            "invoice-draft",
-            "storage-file-feign",
-            "storage-file",
-            "profile-feign",
-            "profile",
-            "global-parameter-feign",
-            "global-parameter",
-            "rw-files",
-            "library-utils",
-            "veragi-gateway",
-            "small-batches",
-            "edi-prepayment",
-            "frontend-veragi"
 
-    );
+    private GitService gitService;
 
+    public CopiarFerramentaService() {
+        this.gitService = new GitService();
+    }
 
     public void processar(boolean java, boolean ferramenta) {
 
         Runnable iniciar = () -> {
 
-            File tools = new File(DIRETORIO_ROOT);
+            File tools = new File(Configuracao.caminhoLocal);
 
             try {
-                if (!tools.exists()) {
-                    tools.mkdirs();
-                }
+                criarDiretorioCasoNaoExitir(tools);
 
                 if (ferramenta)
                     new Ferramenta().executar();
@@ -75,16 +43,22 @@ public class CopiarFerramentaService {
 
     }
 
+    private void criarDiretorioCasoNaoExitir(File tools) {
+        if (!tools.exists()) {
+            tools.mkdirs();
+        }
+    }
+
 
     public void baixarTodosOsProjetosPeloGit() {
-        projetos.forEach(projeto -> {
-            try {
-                gitService.cloneRepo(URL_PARA_CLONE + projeto + ".git", DIRETORIO_ROOT + "/" + projeto, "ede.silva",
-                        "12345678");
-            } catch (GitAPIException e) {
-                e.printStackTrace();
-            }
+        for (String projeto : Configuracao.projetos) {
+                gitService.cloneRepo(
+                        Configuracao.urlGit + projeto + ".git",
+                        Configuracao.caminhoLocal + "/" + projeto, "ede.silva", "12345678");
 
-        });
+
+        }
     }
+
+
 }
