@@ -1,14 +1,23 @@
 package application;
 
 import application.service.CopiarFerramentaService;
-import application.service.GitService;
-import application.service.ProjetosService;
+import application.service.SigletonProjetos;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-public class ArquivoController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class ArquivoController implements Initializable {
 
 
     CopiarFerramentaService copiarFerramentaService = new CopiarFerramentaService();
@@ -16,22 +25,12 @@ public class ArquivoController {
     @FXML
     private Button copiarbtn;
     @FXML
-    private CheckBox sipdi;
-
-    @FXML
-    private CheckBox sigdf;
-
-    @FXML
-    private CheckBox sirff;
-
-    @FXML
-    private CheckBox java;
-    @FXML
-    private CheckBox baixarTodosProjetosGit;
+    private CheckBox apenasCheckout;
     @FXML
     private Button inicializar;
-
-    private ProjetosService projetosService ;
+    @FXML
+    private TableView tableProjects;
+    private Task<Void> task;
 
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
@@ -39,36 +38,45 @@ public class ArquivoController {
 
     @FXML
     public void copiarFerramenta() {
-        copiarFerramentaService.baixarTodosOsProjetosPeloGit();
+
+        if (task == null) {
+            System.out.println("Teste já está rodando");
+        }
+
+        task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                copiarFerramentaService.clonarEFazerCheckout(apenasCheckout.isSelected());
+                return null;
+            }
+        };
+
+        Thread thread = new Thread(task);
+        thread.setDaemon(true);
+        thread.start();
+
     }
 
 
-    private GitService gitService = new GitService();
-
-    @FXML
-    public void inicializar() {
-
-        String property = System.getProperty("user.home");
-
-        String usuario = System.getProperty("user.name");
-
-       if(sipdi.isSelected()){
-            projetosService = new ProjetosService("sipdi", usuario, "Caneta53");
-            projetosService.gerarProjeto();
-        }
-
-        if(sigdf.isSelected()){
-            projetosService = new ProjetosService("sigdf", usuario, "Caneta53");
-            projetosService.gerarProjeto();
-        }
-
-        if(sirff.isSelected()){
-            projetosService = new ProjetosService("sirff", usuario, "Caneta53");
-            projetosService.gerarProjeto();
-        }
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        TableColumn nome = new TableColumn("Nome");
+        TableColumn baixado = new TableColumn("Baixado");
+        TableColumn tagOuBranch = new TableColumn("Tag ou Branch");
+        tableProjects.getColumns().addAll(nome  , tagOuBranch , baixado);
 
 
+        ObservableList<Project> data = FXCollections.observableArrayList(SigletonProjetos.getProjetos());
+
+        nome.setCellValueFactory(new PropertyValueFactory<Project, String>("nome"));
+        baixado.setCellValueFactory(new PropertyValueFactory<Project, String>("baixado"));
+        tagOuBranch.setCellValueFactory(new PropertyValueFactory<Project , String>("tag"));
+
+
+        tableProjects.setItems(data);
 
     }
+
+
 
 }

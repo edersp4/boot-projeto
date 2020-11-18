@@ -1,13 +1,11 @@
 package application.service;
 
-import org.eclipse.jgit.api.errors.GitAPIException;
+import application.Project;
+import application.utils.AlertUtils;
+import javafx.scene.control.Alert.AlertType;
 
-import javax.swing.*;
-import java.io.File;
 
 public class CopiarFerramentaService {
-
-    //https://gitlab-prd1.accesstage.com.br/veragi/frontend-veragi.git
 
     private GitService gitService;
 
@@ -15,49 +13,18 @@ public class CopiarFerramentaService {
         this.gitService = new GitService();
     }
 
-    public void processar(boolean java, boolean ferramenta) {
 
-        Runnable iniciar = () -> {
+    public void clonarEFazerCheckout(boolean ehParaClonar) {
 
-            File tools = new File(Configuracao.caminhoLocal);
-
-            try {
-                criarDiretorioCasoNaoExitir(tools);
-
-                if (ferramenta)
-                    new Ferramenta().executar();
-
-                if (java) {
-                    new JavaService().executar();
-                }
-                JOptionPane.showMessageDialog(null, "Foi copiado com sucesso!");
-            } catch (Exception e1) {
-                JOptionPane.showMessageDialog(null, e1.getMessage());
-                e1.printStackTrace();
-            }
-        };
-
-        Thread thread = new Thread(iniciar);
-
-        thread.start();
-
-    }
-
-    private void criarDiretorioCasoNaoExitir(File tools) {
-        if (!tools.exists()) {
-            tools.mkdirs();
-        }
-    }
-
-
-    public void baixarTodosOsProjetosPeloGit() {
-        for (String projeto : Configuracao.projetos) {
+        for (Project projeto : SigletonProjetos.getProjetos()) {
                 gitService.cloneRepo(
-                        Configuracao.urlGit + projeto + ".git",
-                        Configuracao.caminhoLocal + "/" + projeto, "ede.silva", "12345678");
+                        Configuracao.urlGit + projeto.getNome() + ".git",
+                        Configuracao.caminhoLocal + "/" + projeto.getNome(), Configuracao.usuarioGit, Configuracao.senhaGit , projeto , ehParaClonar);
 
 
         }
+
+        AlertUtils.criarAlerta(AlertType.INFORMATION, null , null, "Fim do processo");
     }
 
 

@@ -4,6 +4,7 @@
 	<groupId>br.com.boot.projeto</groupId>
 	<artifactId>boot-projeto</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 	<properties>
 		<!-- The final name for the JAR that you can find in target directory -->
 		<jar.final.name>jfx8-app</jar.final.name>

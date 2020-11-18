@@ -7,6 +7,7 @@ module application {
     requires org.eclipse.jgit;
     requires zip4j;
     requires commons.configuration2;
+    requires javafx.base;
 
     opens application to javafx.fxml;
     exports application;
