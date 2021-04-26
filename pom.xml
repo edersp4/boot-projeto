@@ -8,7 +8,7 @@
 		<!-- The final name for the JAR that you can find in target directory -->
 		<jar.final.name>jfx8-app</jar.final.name>
 		<!-- the default class that has the public static void main(String[]) method -->
-		<commons.io.version>2.5</commons.io.version>
+		<commons.io.version>2.7</commons.io.version>
 		<commons.configuration.version>2.1</commons.configuration.version>
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
